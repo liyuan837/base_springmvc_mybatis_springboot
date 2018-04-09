@@ -1,6 +1,7 @@
 package com.liyuan.demo.config;
 
 import org.mybatis.spring.SqlSessionFactoryBean;
+import org.mybatis.spring.boot.autoconfigure.SpringBootVFS;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -45,6 +46,9 @@ public class SessionFactoryConfiguration {
 
         //[3]设置数据源
         sqlSessionFactoryBean.setDataSource(dataSource);
+
+        //[补充]无法实现批量扫描的bug
+        sqlSessionFactoryBean.setVfs(SpringBootVFS.class);
 
         //[4]设置实体类所在包路径
         sqlSessionFactoryBean.setTypeAliasesPackage(entityPackage);

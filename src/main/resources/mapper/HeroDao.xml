@@ -8,15 +8,15 @@
         select * from hero order by createtime desc
     </select>
 
-    <select id="findById" parameterType="int" resultType="hero">
+    <select id="findById" parameterType="int" resultType="com.liyuan.demo.entity.Hero">
         select * from hero where id = #{id}
     </select>
 
-    <insert id="saveHero" parameterType="hero" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+    <insert id="saveHero" parameterType="com.liyuan.demo.entity.Hero" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
         insert into hero(name,type,`describe`,skill,createtime) VALUES (#{name},#{type},#{describe},#{skill},#{createtime})
     </insert>
 
-    <update id="updateHero" parameterType="hero">
+    <update id="updateHero" parameterType="com.liyuan.demo.entity.Hero">
         update hero
         <set>
             <if test="name!=null">

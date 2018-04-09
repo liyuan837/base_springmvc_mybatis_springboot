@@ -16,5 +16,6 @@
 
     <typeAliases>
         <package name="com.liyuan.demo.entity"/>
+        <!--<typeAlias alias="hero" type="com.liyuan.demo.entity.Hero"/>-->
     </typeAliases>
 </configuration>
