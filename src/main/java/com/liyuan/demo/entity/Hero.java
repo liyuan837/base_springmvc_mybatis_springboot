@@ -1,5 +1,6 @@
 package com.liyuan.demo.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -8,7 +9,9 @@ import java.util.Date;
  * @Date:Create in 11:20 2018/2/8
  * @Modified By:
  */
-public class Hero {
+public class Hero implements Serializable{
+    private static final long serialVersionUID = 3221700752972709820L;
+
     private Integer id;
 
     private Integer type;

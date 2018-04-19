@@ -26,9 +26,6 @@ public class HeroController {
     @Autowired
     private HeroService heroService;
 
-    @Autowired
-    private RedisTemplate<String,Object> redisTemplate;
-
     private Long start,end;
 
     @ApiOperation(value="获取英雄列表", notes="获取所有英雄的信息列表")
@@ -42,13 +39,6 @@ public class HeroController {
         System.out.println(end-start);
 
         modelMap.put("list",list);
-
-        redisTemplate.opsForList().leftPushAll("list",list);
-
-        start = System.currentTimeMillis();
-        List<Object> prodList = redisTemplate.opsForList().range("list", 0,redisTemplate.opsForList().size("list")-1);
-        end = System.currentTimeMillis();
-        System.out.println(end-start);
 
         return modelMap;
     }
@@ -74,10 +64,8 @@ public class HeroController {
         return modelMap;
     }
 
-    @ApiOperation(value="更新英雄详细信息", notes="根据url的id来指定更新对象，并根据传过来的hero信息来更新英雄详细信息")
-    @ApiImplicitParams( @ApiImplicitParam(name = "hero", value = "英雄详细实体hero", required = true, dataType = "Hero"))
-    @PostMapping("/put")
-    public Map<String,Object> put(@RequestBody Hero hero){
+    @PostMapping("/put/{id}")
+    public Map<String,Object> put(@PathVariable("id") Integer id,@RequestBody Hero hero){
         Map<String,Object> modelMap = new HashMap<>();
         Integer result = heroService.updateHero(hero);
         modelMap.put("hero",hero);

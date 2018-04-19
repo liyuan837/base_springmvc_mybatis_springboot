@@ -1,6 +1,10 @@
 package com.liyuan.demo.dao;
 
 import com.liyuan.demo.entity.Hero;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 
 import java.util.List;
 

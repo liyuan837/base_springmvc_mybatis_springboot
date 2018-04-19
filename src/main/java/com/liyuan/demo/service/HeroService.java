@@ -1,6 +1,7 @@
 package com.liyuan.demo.service;
 
 import com.liyuan.demo.entity.Hero;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,6 +16,7 @@ import java.util.List;
 public interface HeroService {
     List<Hero> queryAll();
 
+    @Cacheable(value = "testCache")
     Hero findById(Integer id);
 
     Integer saveHero(Hero hero);
