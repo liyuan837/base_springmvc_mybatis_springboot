@@ -64,8 +64,8 @@ public class HeroController {
         return modelMap;
     }
 
-    @PostMapping("/put/{id}")
-    public Map<String,Object> put(@PathVariable("id") Integer id,@RequestBody Hero hero){
+    @PostMapping("/put")
+    public Map<String,Object> put(@RequestBody Hero hero){
         Map<String,Object> modelMap = new HashMap<>();
         Integer result = heroService.updateHero(hero);
         modelMap.put("hero",hero);
