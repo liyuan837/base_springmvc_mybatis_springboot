@@ -2,7 +2,11 @@ package com.liyuan.demo.controller;
 
 import com.liyuan.demo.entity.Hero;
 import com.liyuan.demo.service.HeroService;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -22,13 +26,33 @@ public class HeroController {
     @Autowired
     private HeroService heroService;
 
+    @Autowired
+    private RedisTemplate<String,Object> redisTemplate;
+
+    private Long start,end;
+
+    @ApiOperation(value="获取英雄列表", notes="获取所有英雄的信息列表")
     @GetMapping("/get")
     public Map<String,Object> list(){
         Map<String,Object> modelMap = new HashMap<>();
+
+        start = System.currentTimeMillis();
         List<Hero> list = heroService.queryAll();
+        end = System.currentTimeMillis();
+        System.out.println(end-start);
+
         modelMap.put("list",list);
+
+        redisTemplate.opsForList().leftPushAll("list",list);
+
+        start = System.currentTimeMillis();
+        List<Object> prodList = redisTemplate.opsForList().range("list", 0,redisTemplate.opsForList().size("list")-1);
+        end = System.currentTimeMillis();
+        System.out.println(end-start);
+
         return modelMap;
     }
+
 
     @GetMapping("/get/{id}")
     public Map<String,Object> find(@PathVariable("id") Integer id){
@@ -39,6 +63,8 @@ public class HeroController {
 
     }
 
+    @ApiOperation(value="创建英雄", notes="根据Hero对象创建新英雄")
+    @ApiImplicitParam(name = "hero", value = "英雄详细实体hero", required = true, dataType = "Hero")
     @PostMapping("/post")
     public Map<String,Object> post(@RequestBody Hero hero){
         Map<String,Object> modelMap = new HashMap<>();
@@ -48,6 +74,8 @@ public class HeroController {
         return modelMap;
     }
 
+    @ApiOperation(value="更新英雄详细信息", notes="根据url的id来指定更新对象，并根据传过来的hero信息来更新英雄详细信息")
+    @ApiImplicitParams( @ApiImplicitParam(name = "hero", value = "英雄详细实体hero", required = true, dataType = "Hero"))
     @PostMapping("/put")
     public Map<String,Object> put(@RequestBody Hero hero){
         Map<String,Object> modelMap = new HashMap<>();
