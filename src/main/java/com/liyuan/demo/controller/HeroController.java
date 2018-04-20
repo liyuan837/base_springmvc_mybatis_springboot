@@ -39,16 +39,17 @@ public class HeroController extends BaseController{
             return null;
         }
 
-        return new ResponseEntity("",200,"",list);
+        return getSuccessResult(list);
     }
 
 
     @GetMapping("/get/{id}")
-    public Map<String,Object> find(@PathVariable("id") Integer id){
-        Map<String,Object> modelMap = new HashMap<>();
+    public ResponseEntity find(@PathVariable("id") Integer id){
         Hero hero = heroService.findById(id);
-        modelMap.put("hero",hero);
-        return modelMap;
+        if(hero == null){
+            return getFailResult("该英雄不存在！");
+        }
+        return getSuccessResult(hero);
 
     }
 
