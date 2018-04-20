@@ -1,12 +1,13 @@
 package com.liyuan.demo.controller;
 
+import com.liyuan.demo.controller.base.BaseController;
 import com.liyuan.demo.entity.Hero;
+import com.liyuan.demo.entity.ResponseEntity;
 import com.liyuan.demo.service.HeroService;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -21,26 +22,24 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/hero")
-public class HeroController {
+@Api(value="/hero",description = "英雄泪")
+public class HeroController extends BaseController{
 
     @Autowired
     private HeroService heroService;
 
-    private Long start,end;
 
     @ApiOperation(value="获取英雄列表", notes="获取所有英雄的信息列表")
     @GetMapping("/get")
-    public Map<String,Object> list(){
-        Map<String,Object> modelMap = new HashMap<>();
+    public ResponseEntity list(){
 
-        start = System.currentTimeMillis();
         List<Hero> list = heroService.queryAll();
-        end = System.currentTimeMillis();
-        System.out.println(end-start);
 
-        modelMap.put("list",list);
+        if(list == null || list.size()<=0){
+            return null;
+        }
 
-        return modelMap;
+        return new ResponseEntity("",200,"",list);
     }
 
 
