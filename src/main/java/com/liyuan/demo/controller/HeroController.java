@@ -58,17 +58,16 @@ public class HeroController {
     @PostMapping("/post")
     public Map<String,Object> post(@RequestBody Hero hero){
         Map<String,Object> modelMap = new HashMap<>();
-        Integer id = heroService.saveHero(hero);
-        hero.setId(id);
-        modelMap.put("hero",hero);
+        Hero result = heroService.saveHero(hero);
+        modelMap.put("hero",result);
         return modelMap;
     }
 
     @PostMapping("/put")
     public Map<String,Object> put(@RequestBody Hero hero){
         Map<String,Object> modelMap = new HashMap<>();
-        Integer result = heroService.updateHero(hero);
-        modelMap.put("hero",hero);
+        Hero result = heroService.updateHero(hero);
+        modelMap.put("hero",result);
         return modelMap;
     }
     @GetMapping("/delete/{id}")

@@ -15,19 +15,18 @@ import java.util.List;
  * @Date:Create in 11:24 2018/2/8
  * @Modified By:
  */
-@CacheConfig(cacheNames = "hero")
 public interface HeroService {
+
     List<Hero> queryAll();
 
-    @Cacheable(key="#id")
     Hero findById(Integer id);
 
-//    @CachePut(key="#p0.id")
-    Integer saveHero(Hero hero);
 
-//    @CachePut(key="#p0.id")
-    Integer updateHero(Hero hero);
+    Hero saveHero(Hero hero);
 
-    @CacheEvict(key="#id",allEntries = false)
+
+    Hero updateHero(Hero hero);
+
+
     Integer deleteHero(Integer id);
 }
