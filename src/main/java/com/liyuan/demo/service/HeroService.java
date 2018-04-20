@@ -1,11 +1,6 @@
 package com.liyuan.demo.service;
 
-import com.liyuan.demo.entity.Hero;
-import org.springframework.cache.annotation.CacheConfig;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.CachePut;
-import org.springframework.cache.annotation.Cacheable;
-import org.springframework.stereotype.Service;
+import com.liyuan.demo.entity.po.Hero;
 
 import java.util.List;
 

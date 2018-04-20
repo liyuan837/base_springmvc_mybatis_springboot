@@ -1,7 +1,7 @@
 package com.liyuan.demo.service.impl;
 
 import com.liyuan.demo.dao.HeroDao;
-import com.liyuan.demo.entity.Hero;
+import com.liyuan.demo.entity.po.Hero;
 import com.liyuan.demo.service.HeroService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;

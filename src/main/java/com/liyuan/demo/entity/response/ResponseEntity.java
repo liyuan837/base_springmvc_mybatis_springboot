@@ -1,4 +1,4 @@
-package com.liyuan.demo.entity;
+package com.liyuan.demo.entity.response;
 
 import io.swagger.annotations.ApiModelProperty;
 

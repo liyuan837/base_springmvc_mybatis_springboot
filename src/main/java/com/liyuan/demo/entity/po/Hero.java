@@ -1,4 +1,4 @@
-package com.liyuan.demo.entity;
+package com.liyuan.demo.entity.po;
 
 import java.io.Serializable;
 import java.util.Date;
