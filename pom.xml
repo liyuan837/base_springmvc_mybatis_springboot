@@ -73,6 +73,35 @@
 			<artifactId>springfox-swagger-ui</artifactId>
 			<version>2.5.0</version>
 		</dependency>
+
+
+		<!--操作html模板-->
+		<!--<dependency>-->
+			<!--<groupId>org.jsoup</groupId>-->
+			<!--<artifactId>jsoup</artifactId>-->
+			<!--<version>1.7.3</version>-->
+		<!--</dependency>-->
+
+		<!--html转成图片的依赖包-->
+		<dependency>
+			<groupId>org.xhtmlrenderer</groupId>
+			<artifactId>core-renderer</artifactId>
+			<version>R8pre2</version>
+		</dependency>
+
+
+
+		<!--二维码生成依赖包-->
+		<dependency>
+			<groupId>com.google.zxing</groupId>
+			<artifactId>core</artifactId>
+			<version>3.2.1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.zxing</groupId>
+			<artifactId>javase</artifactId>
+			<version>3.2.1</version>
+		</dependency>
 	</dependencies>
 
 	<build>
