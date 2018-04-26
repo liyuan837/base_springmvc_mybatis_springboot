@@ -40,7 +40,7 @@ public class CodeGenerateUtil {
 
         try {
             //生成二维码
-            BitMatrix bitMatrix = new MultiFormatWriter().encode(content, BarcodeFormat.QR_CODE, width, height);
+            BitMatrix bitMatrix = new MultiFormatWriter().encode(content, BarcodeFormat.QR_CODE, width, height,map);
 
            // bitMatrix = deleteWhite(bitMatrix);//删除白边
 
