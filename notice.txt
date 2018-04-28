@@ -1,0 +1,20 @@
+注意点：
+1、本测试项目使用的是springboot默认的类启动的方式启动项目的，默认打成得是jar包，部署方式需要在包目录下，在命令行中运行如下命令
+java -jar demo-0.0.1-SNAPSHOT.jar --server.port = 8080
+2、如果想要打成war包，需要做如下更改
+    （1）修改入口启动类
+    public class DemoApplication extends SpringBootServletInitializer {
+
+    	@Override
+    	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+    		return application.sources(DemoApplication.class);
+    	}
+
+    	public static void main(String[] args) {
+    		SpringApplication.run(DemoApplication.class, args);
+    	}
+    }
+    （2）pom中打包方式改成
+    <packaging>jar</packaging>
+    （3）点击maven project下的package进行打包
+    （4）将target目录下生成的demo-0.0.1-SNAPSHOT.war扔到tomcat下的ROOT目录下（确保该目录下只有一个项目，因为该目录下的项目都会忽略项目名即可访问），或者是更改包名为你自己想要的名字，然后扔到tomcat的webAPP下
