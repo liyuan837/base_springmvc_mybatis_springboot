@@ -31,31 +31,40 @@ public class BaseController {
      */
     public static final String PARAMSVALIDFAIL = "参数错误！";
     /**
-     * 成功的Status Code.
+     * 默认成功的Status Code.
      */
     private static final int RESCODE_OK = 200;
     /**
-     * 失败的Status Code.
+     * 默认失败的Status Code.
      */
     private static final int RESCODE_FAIL = 201;
 
     /**
-     * 默认成功返回数据封装
+     * 默认成功返回数据封装：有返回数据对象 + 成功信息
      */
     protected ResponseEntity getSuccessResult(Object obj) {
-        return new ResponseEntity("ok", RESCODE_OK, "操作成功", obj);
+        return getSuccessResult(RESCODE_OK,"操作成功",obj);
     }
 
     /**
-     * 自定义成功返回数据封装
+     * 默认成功返回数据封装：没有返回数据对象
      * @return
      */
     protected ResponseEntity getSuccessResult() {
-        return getSuccessResult("操作成功");
+        return getSuccessResult(null);
     }
 
     /**
-     * 默认失败返回数据封装
+     * 自定义成功返回数据封装：返回数据对象 + 成功信息 + 成功码
+     *
+     * @return
+     */
+    protected ResponseEntity getSuccessResult(int successCode, String msg, Object obj) {
+        return new ResponseEntity("ok", successCode, msg, obj);
+    }
+
+    /**
+     * 默认失败返回数据封装：只需提供错误信息
      * @return
      */
     protected ResponseEntity getFailResult(String msg) {
@@ -64,7 +73,7 @@ public class BaseController {
     }
 
     /**
-     * 自定义失败返回数据封装
+     * 自定义失败返回数据封装:可自定义错误码+错误信息
      * @param errCode
      * @param msg
      * @return
