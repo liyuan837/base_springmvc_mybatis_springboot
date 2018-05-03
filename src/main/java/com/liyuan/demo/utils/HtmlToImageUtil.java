@@ -65,24 +65,29 @@ public class HtmlToImageUtil {
 //        Element codeImg = doc.getElementById("code");
 //        codeImg.attr("src", codeUrl);
 
+        //得到系统默认的encoding码
+        String fileEncode = System.getProperty("file.encoding");
+
         FileOutputStream fos = new FileOutputStream(inputFilename, false);
         OutputStreamWriter osw = new OutputStreamWriter(fos, "UTF-8");
-        osw.write("<html>\n" +
+        String html = "<html>\n" +
                 " <head> \n" +
                 "  <meta charset=\"UTF-8\"/> \n" +
                 "  <title>工作证</title> \n" +
                 " </head> \n" +
                 " <body> \n" +
                 "  <div class=\"employeecard\" style=\"background: url('http://pic.qianmi.com/ejz/ejz2.0/static/images/ggz-bg.jpg') no-repeat center;width: 1087px;height: 660px;position: relative\"> \n" +
-                "   <h3 class=\"title\" style=\"font-size: 100px;font-weight: 500;position: absolute;right: 100px;top: 40px;margin: 0;letter-spacing: 20px\">工作证</h3> \n" +
+                "   <h3 class=\"title\" style=\"font-family:SimSun;font-size: 100px;font-weight: 500;position: absolute;right: 100px;top: 40px;margin: 0;letter-spacing: 20px\">工作证</h3> \n" +
                 "   <img id=\"code\" class=\"ewm\" src=\""+codeUrl+"\" width=\"178\" height=\"178\" alt=\"\" style=\"position: absolute;right: 113px;bottom: 145px\"/> \n" +
-                "   <span id=\"name\" class=\"name\" style=\"font-size: 62.5px;position: absolute;bottom: 263px;left: 480px;font-weight: bold;letter-spacing: 20px\">"+name+"</span> \n" +
+                "   <span id=\"name\" class=\"name\" style=\"font-family:SimSun;font-size: 62.5px;position: absolute;bottom: 263px;left: 480px;font-weight: bold;letter-spacing: 20px\">"+name+"</span> \n" +
                 "   <div class=\"tx\" style=\"width: 279px;height: 273px;overflow: hidden;position: absolute;left: 107px;bottom: 196px\"> \n" +
                 "    <img id=\"header\" src=\""+headerUrl+"\" alt=\"\" style=\"width: 100%;display: block\"/> \n" +
                 "   </div> \n" +
                 "  </div>  \n" +
                 " </body>\n" +
-                "</html>");
+                "</html>";
+//        System.out.println(fileEncode);
+        osw.write(new String(html.getBytes("UTF-8"),fileEncode));
         osw.close();
     }
 
