@@ -9,6 +9,6 @@
 5、swagger
 
 二、工具类
-1、html模板-->图片
-2、二维码生成工具
-3、多文件打包压缩工具
+1、HtmlToImageUtil:html模板-->图片
+2、CodeGenerateUtil:二维码生成工具
+3、ZipUtil:多文件打包压缩工具
