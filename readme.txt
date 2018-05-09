@@ -1,25 +1,24 @@
-ÕâÊÇÒ»¸öÊ¹ÓÃspringboot´î½¨springmvc+mybatisµÄ»ù´¡¿ò¼Ü
+è¿™æ˜¯ä¸€ä¸ªä½¿ç”¨springbootæ­å»ºspringmvc+mybatisçš„åŸºç¡€æ¡†æ¶
 
-°üº¬ÈçÏÂÅäÖÃ£º
-Ò»¡¢¿ò¼ÜÅäÖÃ
-1¡¢mysql
-2¡¢c3p0Á¬½Ó³Ø
-3¡¢mybatis£º³Ö¾Ã²ã
-4¡¢Redis£º»º´æ»úÖÆ
-5¡¢swagger£º×Ô¶¯Éú³ÉAPI
+åŒ…å«å¦‚ä¸‹é…ç½®ï¼š
+ä¸€ã€æ¡†æ¶é…ç½®
+1ã€mysql
+2ã€c3p0è¿æ¥æ± 
+3ã€mybatisï¼šæŒä¹…å±‚
+4ã€Redisï¼šç¼“å­˜æœºåˆ¶
+5ã€swaggerï¼šè‡ªåŠ¨ç”ŸæˆAPI
 
-¶ş¡¢¹¤¾ßÀà
-1¡¢HtmlToImageUtil:htmlÄ£°å-->Í¼Æ¬
-2¡¢CodeGenerateUtil:¶şÎ¬ÂëÉú³É¹¤¾ß
-3¡¢ZipUtil:¶àÎÄ¼ş´ò°üÑ¹Ëõ¹¤¾ß
+äºŒã€å·¥å…·ç±»
+1ã€HtmlToImageUtil:htmlæ¨¡æ¿-->å›¾ç‰‡
+2ã€CodeGenerateUtil:äºŒç»´ç ç”Ÿæˆå·¥å…·
+3ã€ZipUtil:å¤šæ–‡ä»¶æ‰“åŒ…å‹ç¼©å·¥å…·
 
-ÆßÅ£ÔÆ´æ´¢(×Ô¼ºµÄ)
-1¡¢ÕËºÅÃÜÂë£ºÍøÒ×ÓÊÏäÕËºÅÃÜÂë
-2¡¢ÃØÔ¿£ºeGS5NGHyAtclrEElUUp4kvvKJZLJKGGWkSDosRW6(AccessKey)¡¢2oO_q64YVacvtdaP2afjiRt7hZxkgG3G41_jaHmD(SecretKey)
+ä¸ƒç‰›äº‘å­˜å‚¨(è‡ªå·±çš„)
+1ã€è´¦å·å¯†ç ï¼šç½‘æ˜“é‚®ç®±è´¦å·å¯†ç 
+2ã€ç§˜é’¥ï¼šeGS5NGHyAtclrEElUUp4kvvKJZLJKGGWkSDosRW6(AccessKey)ã€2oO_q64YVacvtdaP2afjiRt7hZxkgG3G41_jaHmD(SecretKey)
 
-ÆßÅ£ÔÆ´æ´¢(¹«Ë¾µÄ)
-1¡¢ÕËºÅÃÜÂë£º18951911@qq.com+qianmi.com
-2¡¢ÃØÔ¿£ºAccessKey£ºKSu5ZLyJRsqd1LBvlQ8ffgRyr1mUM-hbkn3CjCGq
-       SecretKey£ºSoiRJxHuhmhUrPWD5Rhnf2BHTyeFd6nzB_QYGRft
-       bucket£ºvdisk1
-
+ä¸ƒç‰›äº‘å­˜å‚¨(å…¬å¸çš„)
+1ã€è´¦å·å¯†ç ï¼š18951911@qq.com+qianmi.com
+2ã€ç§˜é’¥ï¼šAccessKeyï¼šKSu5ZLyJRsqd1LBvlQ8ffgRyr1mUM-hbkn3CjCGq
+       SecretKeyï¼šSoiRJxHuhmhUrPWD5Rhnf2BHTyeFd6nzB_QYGRft
+       bucketï¼švdisk1
