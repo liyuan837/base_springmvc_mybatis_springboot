@@ -89,8 +89,6 @@
 			<version>R8pre2</version>
 		</dependency>
 
-
-
 		<!--二维码生成依赖包-->
 		<dependency>
 			<groupId>com.google.zxing</groupId>
@@ -101,6 +99,13 @@
 			<groupId>com.google.zxing</groupId>
 			<artifactId>javase</artifactId>
 			<version>3.2.1</version>
+		</dependency>
+
+		<!-- 七牛云存储依赖 -->
+		<dependency>
+			<groupId>com.qiniu</groupId>
+			<artifactId>qiniu-java-sdk</artifactId>
+			<version>[7.2.0, 7.2.99]</version>
 		</dependency>
 	</dependencies>
 

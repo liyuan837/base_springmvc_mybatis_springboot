@@ -58,13 +58,13 @@ public class XHTMLToImage {
 
     public static void main(final String[] args) throws Exception {
         String[] names = new String[]{"斑马","花千骨"};
-        String[] headerUrls = new String[]{"https://img.1000.com/ehome/dev/00001/1524622911124.jpg@279w_273h_1e_1c_200-2ci.png","https://img.1000.com/ehome/dev/1234/1524640419025.jpg?x-oss-process=image/resize,w_279,h_273/circle,r_200"};
+        String[] headerUrls = new String[]{"https://img.1000.com/ehome/dev/00001/1524622911124.jpg@279w_273h_1e_1c_200-2ci.png","http://resources.1000.com/ehome/dev/1234/1501040618967.jpg?x-oss-process=image/resize,w_279,h_273/circle,r_200"};
         String[] codeUrls = new String[]{"http://www.dyjkglass.com/erweima.png","http://www.dyjkglass.com/erweima.png"};
 
        for(int i=0;i<names.length;i++){
            HtmlToImageUtil util = new HtmlToImageUtil();
            util.setSize(1087,660);
-           util.setInputFilename("d:/template/new.html");
+           util.setInputFilename("d:/template/index.html");
 
            util.setOutputFilename("out"+i+".png");
 

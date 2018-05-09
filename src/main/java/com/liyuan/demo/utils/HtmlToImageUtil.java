@@ -77,7 +77,7 @@ public class HtmlToImageUtil {
                 " </head> \n" +
                 " <body> \n" +
                 "  <div class=\"employeecard\" style=\"background: url('http://pic.qianmi.com/ejz/ejz2.0/static/images/ggz-bg.jpg') no-repeat center;width: 1087px;height: 660px;position: relative\"> \n" +
-                "   <h3 class=\"title\" style=\"font-family:SimSun;font-size: 100px;font-weight: 500;position: absolute;right: 100px;top: 40px;margin: 0;letter-spacing: 20px\">工作证</h3> \n" +
+                "   <h3 class=\"title\" style=\"font-family:'PingFangSC-Medium';font-size: 100px;font-weight: 500;position: absolute;right: 100px;top: 40px;margin: 0;letter-spacing: 20px\">工作证</h3> \n" +
                 "   <img id=\"code\" class=\"ewm\" src=\""+codeUrl+"\" width=\"178\" height=\"178\" alt=\"\" style=\"position: absolute;right: 113px;bottom: 145px\"/> \n" +
                 "   <span id=\"name\" class=\"name\" style=\"font-family:SimSun;font-size: 62.5px;position: absolute;bottom: 263px;left: 480px;font-weight: bold;letter-spacing: 20px\">"+name+"</span> \n" +
                 "   <div class=\"tx\" style=\"width: 279px;height: 273px;overflow: hidden;position: absolute;left: 107px;bottom: 196px\"> \n" +
@@ -86,7 +86,22 @@ public class HtmlToImageUtil {
                 "  </div>  \n" +
                 " </body>\n" +
                 "</html>";
-//        System.out.println(fileEncode);
+        System.out.println(fileEncode);
+//        String html = "<!DOCTYPE html>\n" +
+//                "<html>\n" +
+//                " <head> \n" +
+//                "  <meta charset=\"utf-8\" /> \n" +
+//                " </head> \n" +
+//                " <body> \n" +
+//                "  <div class=\"layout\" style=\"width:620px;height:380px;position:relative;\"> \n" +
+//                "   <img src=\"img/model.png\" style=\"width:620px;height:380px;\" /> \n" +
+//                "   <img id=\"header\" style=\"width:164px;height:164px;position:absolute;top:106px;left: 60px;\" src='"+headerUrl+"' />\n" +
+//                "   <img src=\"img/log_box.png\" style=\"height:380px;position:absolute;top:0px;left:0px;\" /> \n" +
+//                "   <img id=\"code\" style=\"position:absolute;width:120px;height:120px;bottom:90px;right:40px;\" src='"+codeUrl+"' />\n" +
+//                "   <span id=\"name\" style=\"position:absolute;top:170px;left:290px;color:#999;font-size:32px;font-weight:bold;\">"+name+"</span>\n" +
+//                "  </div>  \n" +
+//                " </body>\n" +
+//                "</html>";
         osw.write(new String(html.getBytes("UTF-8"),fileEncode));
         osw.close();
     }
