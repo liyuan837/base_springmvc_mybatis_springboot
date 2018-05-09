@@ -8,6 +8,7 @@ import com.liyuan.demo.service.HeroService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,7 +31,7 @@ public class HeroController extends BaseController{
     private HeroService heroService;
 
 
-    @ApiOperation(value="获取英雄列表", notes="获取所有英雄的信息列表")
+    @ApiOperation(value="查询", notes="获取所有英雄的信息列表",httpMethod = "GET")
     @GetMapping("/get")
     public ResponseEntity list() throws DemoException{
         List<Hero> list = heroService.queryAll();
@@ -40,6 +41,7 @@ public class HeroController extends BaseController{
         return getSuccessResult(list);
     }
 
+    @ApiOperation(value="查询", notes="根据ID查询英雄详情",httpMethod = "GET")
     @GetMapping("/get/{id}")
     public ResponseEntity find(@PathVariable("id") Integer id) throws DemoException{
         Hero hero = heroService.findById(id);
@@ -50,7 +52,7 @@ public class HeroController extends BaseController{
 
     }
 
-    @ApiOperation(value="创建英雄", notes="根据Hero对象创建新英雄")
+    @ApiOperation(value="新增", notes="根据Hero对象创建新英雄")
     @ApiImplicitParam(name = "hero", value = "英雄详细实体hero", required = true, dataType = "Hero")
     @PostMapping("/post")
     public Map<String,Object> post(@RequestBody Hero hero) throws DemoException{
@@ -60,6 +62,8 @@ public class HeroController extends BaseController{
         return modelMap;
     }
 
+    @ApiOperation(value="更新", notes="根据ID更新英雄信息",httpMethod = "POST")
+    @ApiImplicitParam(name = "hero", value = "英雄详细实体hero", required = true, dataType = "Hero")
     @PostMapping("/put")
     public Map<String,Object> put(@RequestBody Hero hero) throws DemoException{
         Map<String,Object> modelMap = new HashMap<>();
@@ -67,12 +71,13 @@ public class HeroController extends BaseController{
         modelMap.put("hero",result);
         return modelMap;
     }
+
+    @ApiOperation(value="删除", notes="根据ID删除英雄",httpMethod = "GET")
     @GetMapping("/delete/{id}")
     public Map<String,Object> delete(@PathVariable("id") Integer id) throws DemoException{
         Map<String,Object> modelMap = new HashMap<>();
         Integer result = heroService.deleteHero(id);
         modelMap.put("result","deleteSuccess");
         return modelMap;
-
     }
 }

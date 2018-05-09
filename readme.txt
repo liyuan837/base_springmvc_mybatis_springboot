@@ -1,8 +1,8 @@
-ÕâÊÇÒ»¸öÊ¹ÓÃspringboot´î½¨springmvc+mybatisµÄ»ù´¡¿ò¼Ü
+è¿™æ˜¯ä¸€ä¸ªä½¿ç”¨springbootæ­å»ºspringmvc+mybatisçš„åŸºç¡€æ¡†æ¶
 
-°üº¬ÈçÏÂÅäÖÃ£º
-1¡¢mysql
-2¡¢c3p0Á¬½Ó³Ø
-3¡¢mybatis
-4¡¢Redis
-5¡¢swagger
+åŒ…å«å¦‚ä¸‹é…ç½®ï¼š
+1ã€mysql
+2ã€c3p0è¿æ¥æ± 
+3ã€mybatis
+4ã€Redis
+5ã€swagger
