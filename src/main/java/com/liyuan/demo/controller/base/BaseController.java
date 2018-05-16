@@ -74,6 +74,20 @@ public class BaseController {
     }
 
     /**
+     * 业务异常控制
+     *
+     * @param e
+     * @return
+     */
+    @ExceptionHandler(DemoException.class)
+    @ResponseBody
+    public ResponseEntity ExceptionHandler(DemoException e) {
+        logger.warn(e.getLocalizedMessage());
+        return this.getFailResult(e.getErrCode(), e.getMessage());
+    }
+
+
+    /**
      * 运行期异常控制
      *
      * @param e

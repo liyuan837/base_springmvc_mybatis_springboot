@@ -1,6 +1,6 @@
 package com.liyuan.demo.config;
 
-import com.liyuan.demo.JwtInterceptor;
+import com.liyuan.demo.interceptor.JwtInterceptor;
 import com.liyuan.demo.filter.AccessFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
@@ -26,11 +26,11 @@ public class WebConfiguration extends WebMvcConfigurerAdapter {
      */
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
+        //设置拦截器白名单
         String[] excludes = new String[]{
-                "/favicon**", "/error", "/*.html", "/swagger*", "/v2/*", "*/productDetail"
+                "/favicon**", "/error", "/*.html", "/swagger*", "/v2/*"
         };
         jwtInterceptor.setExcludes(Arrays.asList(excludes));
-        jwtInterceptor.setRedirectUrl("/");
         registry.addInterceptor(jwtInterceptor).addPathPatterns("/**");
     }
 

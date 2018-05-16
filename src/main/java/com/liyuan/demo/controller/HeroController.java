@@ -1,10 +1,13 @@
 package com.liyuan.demo.controller;
 
+import com.liyuan.demo.annotation.NotToken;
 import com.liyuan.demo.controller.base.BaseController;
 import com.liyuan.demo.entity.exception.DemoException;
 import com.liyuan.demo.entity.po.Hero;
+import com.liyuan.demo.entity.po.JwtUser;
 import com.liyuan.demo.entity.response.ResponseEntity;
 import com.liyuan.demo.service.HeroService;
+import com.liyuan.demo.util.JwtUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
@@ -43,7 +46,8 @@ public class HeroController extends BaseController{
 
     @ApiOperation(value="查询", notes="根据ID查询英雄详情",httpMethod = "GET")
     @GetMapping("/get/{id}")
-    public ResponseEntity find(@PathVariable("id") Integer id) throws DemoException{
+    public ResponseEntity find(@RequestHeader("Authorization") String Authorization,@PathVariable("id") Integer id) throws DemoException{
+        JwtUser jwtUser = JwtUtil.checkLogin(Authorization);
         Hero hero = heroService.findById(id);
         if(hero == null){
             return getFailResult("该英雄不存在！");
