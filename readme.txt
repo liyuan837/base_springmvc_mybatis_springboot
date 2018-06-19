@@ -10,3 +10,7 @@
 
 高级配置：
 1、采用JWT登录验证，涉及到的配置：JwtUtil工具类 + JwtInterceptor拦截器 + NotToken注解接口
+2、提供几种常用工具：包括多文件上传下载的前后端示例代码：前端在HTML文件夹下，后端UtilsController
+3、自定义各种字符串校验规则注解：手机号、身份证、邮箱等
+    注解使用方式：在字段上面：@EqualLength(regexp = ValidUtil.IDNO,isBlank = true,message = "请输入正确的身份证号")
+

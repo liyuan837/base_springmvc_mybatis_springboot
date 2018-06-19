@@ -6,9 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @Author: LiYuan
- * @Description:封装json
- * @Date: 11:24 2018/5/15
+ * 封装json
  */
 public class JSONUtil {
     /**

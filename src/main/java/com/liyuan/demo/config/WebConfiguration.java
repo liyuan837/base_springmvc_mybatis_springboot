@@ -11,6 +11,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 
 import java.util.Arrays;
 
+/**
+ * 注册拦截器和过滤器
+ */
 @Configuration
 public class WebConfiguration extends WebMvcConfigurerAdapter {
 

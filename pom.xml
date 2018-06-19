@@ -14,8 +14,8 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>1.5.10.RELEASE</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<version>2.0.1.RELEASE</version>
+		<relativePath/>
 	</parent>
 
 	<properties>
@@ -56,6 +56,13 @@
 			<version>0.9.5.2</version>
 		</dependency>
 
+		<!--数据库连接池-->
+		<dependency>
+			<groupId>com.zaxxer</groupId>
+			<artifactId>HikariCP</artifactId>
+			<version>2.4.0</version>
+		</dependency>
+
 		<!--redis缓存数据库依赖-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -74,6 +81,31 @@
 			<version>2.5.0</version>
 		</dependency>
 
+		<!--分页插件-->
+		<dependency>
+			<groupId>com.github.pagehelper</groupId>
+			<artifactId>pagehelper-spring-boot-starter</artifactId>
+			<version>1.2.3</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-commons</artifactId>
+			<version>2.0.6.RELEASE</version>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-beanutils</groupId>
+			<artifactId>commons-beanutils</artifactId>
+			<version>1.6</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.0.1</version>
+		</dependency>
+
 		<!--jwt-->
 		<dependency>
 			<groupId>io.jsonwebtoken</groupId>
@@ -87,11 +119,18 @@
 			<artifactId>lombok</artifactId>
 		</dependency>
 
+		<!--json依赖-->
 		<dependency>
 			<groupId>net.sf.json-lib</groupId>
 			<artifactId>json-lib</artifactId>
 			<version>2.4</version>
 			<classifier>jdk15</classifier>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-collections</groupId>
+			<artifactId>commons-collections</artifactId>
+			<version>3.2.1</version>
 		</dependency>
 	</dependencies>
 

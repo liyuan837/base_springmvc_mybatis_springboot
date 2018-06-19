@@ -1,8 +1,10 @@
 package com.liyuan.demo.util;
 
-import com.liyuan.demo.entity.exception.DemoException;
-import com.liyuan.demo.entity.po.JwtUser;
-import io.jsonwebtoken.*;
+import com.liyuan.demo.domain.exception.DemoException;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.JwtBuilder;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import org.apache.tomcat.util.codec.binary.Base64;
 
 import javax.crypto.SecretKey;

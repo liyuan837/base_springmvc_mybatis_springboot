@@ -1,8 +1,6 @@
 package com.liyuan.demo.interceptor;
 
 import com.liyuan.demo.annotation.NotToken;
-import com.liyuan.demo.entity.exception.DemoException;
-import com.liyuan.demo.entity.po.JwtUser;
 import com.liyuan.demo.util.JSONUtil;
 import org.springframework.stereotype.Component;
 import org.springframework.util.AntPathMatcher;
@@ -10,22 +8,17 @@ import org.springframework.util.PathMatcher;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
-import redis.clients.jedis.Response;
 
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.io.PrintWriter;
 import java.util.Collections;
 import java.util.List;
 
 /**
- * @Author:LiYuan
  * @description:用户Authorthon验证拦截器
- * @Date:Create in 11:02 2018/5/12
- * @Modified By:
  */
 @Component
 public class JwtInterceptor implements HandlerInterceptor{
@@ -49,7 +42,6 @@ public class JwtInterceptor implements HandlerInterceptor{
     @Override
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object handler) throws Exception {
         String urlPath = httpServletRequest.getRequestURI();
-        System.out.println("uri:"+urlPath);
         //[1]请求地址处理
         if (!urlPath.startsWith("/")) {
             urlPath = "/" + urlPath;
@@ -69,7 +61,18 @@ public class JwtInterceptor implements HandlerInterceptor{
             }
         }
 
-        //[4]其他接口都需要JWT token验证
+        //[4]模拟拦截所有JwtController下的请求
+        if(urlPath.indexOf("/jwt/") >=0){
+            String authHeader = httpServletRequest.getHeader("Authorization");
+            if (authHeader == null || authHeader.equals("")) {
+                //拦截，并且返回错误信息
+                errorResponse(httpServletResponse,201,"尚未携带有效的Token");
+                return false;
+            }else{
+                return true;
+            }
+        }
+//        //[4]其他接口都需要JWT token验证
 //        String authHeader = httpServletRequest.getHeader("Authorization");
 //
 //        if (authHeader == null || authHeader.equals("")) {

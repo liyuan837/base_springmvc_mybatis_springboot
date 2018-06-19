@@ -1,87 +1,104 @@
 package com.liyuan.demo.controller;
 
-import com.liyuan.demo.annotation.NotToken;
-import com.liyuan.demo.controller.base.BaseController;
-import com.liyuan.demo.entity.exception.DemoException;
-import com.liyuan.demo.entity.po.Hero;
-import com.liyuan.demo.entity.po.JwtUser;
-import com.liyuan.demo.entity.response.ResponseEntity;
+import com.liyuan.demo.domain.condition.hero.HeroCondition;
+import com.liyuan.demo.domain.exception.DemoException;
+import com.liyuan.demo.domain.po.hero.HeroPo;
+import com.liyuan.demo.domain.response.ResponseEntity;
+import com.liyuan.demo.form.hero.*;
+import com.liyuan.demo.domain.response.PageListResponse;
 import com.liyuan.demo.service.HeroService;
-import com.liyuan.demo.util.JwtUtil;
+import com.liyuan.demo.util.CopyUtil;
+import com.liyuan.demo.vo.hero.HeroVo;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
+import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
-/**
- * @Author:LiYuan
- * @description:
- * @Date:Create in 15:28 2018/2/8
- * @Modified By:
- */
 @RestController
 @RequestMapping("/hero")
-@Api(value="/hero",description = "英雄泪")
-public class HeroController extends BaseController{
+@Api(value = "/hero", description = "")
+public class HeroController extends BaseController {
 
-    @Autowired
-    private HeroService heroService;
+	@Autowired
+	private HeroService heroService;
+
+	@ApiOperation(value = "查询",notes = "根据ID查询",httpMethod = "GET")
+	@GetMapping(value = "/query")
+	public ResponseEntity query(@ApiParam(value = "", required = true)@RequestParam Integer id) throws DemoException {
+		HeroPo po = heroService.queryWithValid(id);
+		HeroVo vo = CopyUtil.transfer(po, HeroVo.class);
+		return getSuccessResult(vo);
+	}
+
+	@ApiOperation(value = "查询数量",notes = "查询数量",httpMethod = "POST")
+	@PostMapping(value = "/queryCount")
+	public ResponseEntity<Integer> queryCount(@RequestBody@Valid HeroQueryForm form) throws DemoException {
+		HeroCondition condition = CopyUtil.transfer(form, HeroCondition.class);
+		int count = heroService.queryCount(condition);
+		return getSuccessResult(count);
+	}
+
+	@ApiOperation(value = "查询列表",notes = "查询列表",httpMethod = "POST")
+	@PostMapping(value = "/queryList")
+	public ResponseEntity<PageListResponse<HeroVo>> queryList(@RequestBody@Valid HeroQueryForm form) throws DemoException {
+		HeroCondition condition = CopyUtil.transfer(form, HeroCondition.class);
+		List<HeroPo> poList = heroService.queryList(condition);
+		List<HeroVo> voList = CopyUtil.transfer(poList, HeroVo.class);
+		return getSuccessResult(voList);
+	}
+
+	@ApiOperation(value = "查询列表(带分页)",notes = "查询列表(带分页)",httpMethod = "POST")
+	@PostMapping(value = "/queryPageList")
+	public ResponseEntity<PageListResponse<HeroVo>> queryPageList(@RequestBody@Valid HeroQueryForm form) throws DemoException {
+		HeroCondition condition = CopyUtil.transfer(form, HeroCondition.class);
+		List<HeroVo> voList = new ArrayList<>();
+		int count = heroService.queryCount(condition);
+		if (count > 0) {
+			List<HeroPo> poList = heroService.queryList(condition);
+			voList = CopyUtil.transfer(poList, HeroVo.class);
+		}
+		return getSuccessResult(getPageListResponse(condition.getPageNum(),condition.getPageSize(),count,voList));
+	}
+
+	@ApiOperation(value = "新增",notes = "新增",httpMethod = "POST")
+	@PostMapping(value = "/add")
+	public ResponseEntity<HeroVo> add(@RequestBody@Valid HeroCreateForm form) throws DemoException {
+		HeroPo po = CopyUtil.transfer(form, HeroPo.class);
+		heroService.insert(po);
+		HeroVo vo = CopyUtil.transfer(po, HeroVo.class);
+		return getSuccessResult(vo);
+	}
+
+	@ApiOperation(value = "修改",notes = "修改",httpMethod = "POST")
+	@PostMapping(value = "/update")
+	public ResponseEntity update(@RequestBody@Valid HeroUpdateForm form) throws DemoException {
+		HeroPo po = CopyUtil.transfer(form, HeroPo.class);
+		heroService.update(po);
+		return getSuccessResult();
+	}
 
 
-    @ApiOperation(value="查询", notes="获取所有英雄的信息列表",httpMethod = "GET")
-    @GetMapping("/get")
-    public ResponseEntity list() throws DemoException{
-        List<Hero> list = heroService.queryAll();
-        if(list == null || list.size()<=0){
-            return null;
-        }
-        return getSuccessResult(list);
-    }
+	@ApiOperation(value = "删除",notes = "删除",httpMethod = "POST")
+	@PostMapping(value = "/delete")
+	public ResponseEntity delete(@RequestHeader("Authonz") String token,@RequestBody@Valid HeroDeleteForm form) throws DemoException {
+		heroService.delete(form.getId());
+		return getSuccessResult();
+	}
 
-    @ApiOperation(value="查询", notes="根据ID查询英雄详情",httpMethod = "GET")
-    @GetMapping("/get/{id}")
-    public ResponseEntity find(@RequestHeader("Authorization") String Authorization,@PathVariable("id") Integer id) throws DemoException{
-        JwtUser jwtUser = JwtUtil.checkLogin(Authorization);
-        Hero hero = heroService.findById(id);
-        if(hero == null){
-            return getFailResult("该英雄不存在！");
-        }
-        return getSuccessResult(hero);
+	/**
+	 * HeroQueryForm转换为HeroCondition
+	 *
+	 * @param form
+	 * @return
+	 */
+	private HeroCondition getConditionByQueryForm(HeroQueryForm form) {
+		HeroCondition condition = CopyUtil.transfer(form, HeroCondition.class);
+		return condition;
+	}
 
-    }
-
-    @ApiOperation(value="新增", notes="根据Hero对象创建新英雄")
-    @ApiImplicitParam(name = "hero", value = "英雄详细实体hero", required = true, dataType = "Hero")
-    @PostMapping("/post")
-    public Map<String,Object> post(@RequestBody Hero hero) throws DemoException{
-        Map<String,Object> modelMap = new HashMap<>();
-        Hero result = heroService.saveHero(hero);
-        modelMap.put("hero",result);
-        return modelMap;
-    }
-
-    @ApiOperation(value="更新", notes="根据ID更新英雄信息",httpMethod = "POST")
-    @ApiImplicitParam(name = "hero", value = "英雄详细实体hero", required = true, dataType = "Hero")
-    @PostMapping("/put")
-    public Map<String,Object> put(@RequestBody Hero hero) throws DemoException{
-        Map<String,Object> modelMap = new HashMap<>();
-        Hero result = heroService.updateHero(hero);
-        modelMap.put("hero",result);
-        return modelMap;
-    }
-
-    @ApiOperation(value="删除", notes="根据ID删除英雄",httpMethod = "GET")
-    @GetMapping("/delete/{id}")
-    public Map<String,Object> delete(@PathVariable("id") Integer id) throws DemoException{
-        Map<String,Object> modelMap = new HashMap<>();
-        Integer result = heroService.deleteHero(id);
-        modelMap.put("result","deleteSuccess");
-        return modelMap;
-    }
 }
